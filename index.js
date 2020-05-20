@@ -1,0 +1,47 @@
+const defs = {
+    host: "http://log.bxiaob.top/api_track/log",
+    token: "test",
+    clientid: "1",
+    version: "0.0.0",
+    meta: {},
+    platform: "",
+};
+
+class Tracker {
+    constructor(opts) {
+        this.cfg = Object.assign(this.cfg, defs, opts);
+    }
+    cfg = {};
+    //设置用户id
+    setClientid(clientid) {
+        this.cfg.clientid = clientid;
+    }
+    //设置平台
+    setPlatform(platform) {
+        this.cfg.platform = platform;
+    }
+    //设置版本号
+    setVersion(version) {
+        this.cfg.version = version;
+    }
+    //发送消息
+    msg(title, desc, meta) {
+        if (meta) {
+            this.__post(title, desc, meta || this.cfg.meta);
+        } else {
+            this.__get(title, desc);
+        }
+    }
+    __post(title, desc, meta) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", this.cfg.host);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.send(JSON.stringify({ title, desc, meta, token: this.cfg.token, clientid: this.cfg.clientid, platform: this.cfg.platform, version: this.cfg.version }));
+    }
+    __get(title, desc, meta) {
+        const params = "title=" + title + "&desc=" + desc;
+        const img = new Image();
+        img.src = this.cfg.host + "?" + params;
+    }
+}
+module.exports = Tracker;
