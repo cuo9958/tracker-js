@@ -9,7 +9,7 @@ const tracker_defs = {
 
 class Tracker {
     constructor(opts) {
-        this.cfg = Object.assign(this.cfg, tracker_defs, opts);
+        this.cfg = Object.assign({}, tracker_defs, opts);
     }
     cfg = {};
     //设置用户id
