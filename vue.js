@@ -1,6 +1,6 @@
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(null, exports);
+        var v = factory(require, exports);
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
@@ -44,9 +44,23 @@
         }
         __post(title, desc, meta) {
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", this.cfg.host);
+            xhr.open("POST", this.cfg.host.replace("http://", "https://"));
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            xhr.send(JSON.stringify({ title, desc, meta, token: this.cfg.token, clientid: this.cfg.clientid, platform: this.cfg.platform, version: this.cfg.version }));
+            const params = "title=" +
+                encodeURIComponent(title) +
+                "&desc=" +
+                encodeURIComponent(desc) +
+                "&token=" +
+                this.cfg.token +
+                "&clientid=" +
+                this.cfg.clientid +
+                "&platform=" +
+                this.cfg.platform +
+                "&version=" +
+                this.cfg.version +
+                "&meta=" +
+                encodeURIComponent(JSON.stringify(meta));
+            xhr.send(params);
         }
         __get(title, desc) {
             const params = "title=" + title + "&desc=" + desc + "&token=" + this.cfg.token + "&clientid=" + this.cfg.clientid + "&platform=" + this.cfg.platform + "&version=" + this.cfg.version;

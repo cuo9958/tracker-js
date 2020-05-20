@@ -1,6 +1,6 @@
 {
     "name": "node-tracker-js",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "js发送消息",
     "main": "index.js",
     "scripts": {
