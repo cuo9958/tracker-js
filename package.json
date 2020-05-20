@@ -1,6 +1,6 @@
 {
     "name": "node-tracker-js",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "js发送消息",
     "main": "index.js",
     "scripts": {
@@ -12,7 +12,7 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/cuo9958/tracker-js/issues"
     },

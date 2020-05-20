@@ -1,4 +1,4 @@
-const defs = {
+const tracker_defs = {
     host: "http://log.bxiaob.top/api_track/log",
     token: "test",
     clientid: "1",
@@ -9,7 +9,7 @@ const defs = {
 
 class Tracker {
     constructor(opts) {
-        this.cfg = Object.assign(this.cfg, defs, opts);
+        this.cfg = Object.assign(this.cfg, tracker_defs, opts);
     }
     cfg = {};
     //设置用户id
@@ -39,7 +39,8 @@ class Tracker {
         xhr.send(JSON.stringify({ title, desc, meta, token: this.cfg.token, clientid: this.cfg.clientid, platform: this.cfg.platform, version: this.cfg.version }));
     }
     __get(title, desc, meta) {
-        const params = "title=" + title + "&desc=" + desc;
+        const params =
+            "title=" + title + "&desc=" + desc + "&token=" + this.cfg.token + "&clientid=" + this.cfg.clientid + "&platform=" + this.cfg.platform + "&version=" + this.cfg.version;
         const img = new Image();
         img.src = this.cfg.host + "?" + params;
     }
